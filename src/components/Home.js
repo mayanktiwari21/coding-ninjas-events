@@ -190,27 +190,38 @@ const Home = () => {
           {events.length > 0 &&
             events.map((e) => <Card key={e.id} event={e} />)}
         </div>
-        <div>
-          <nav aria-label='Page navigation example'>
-            <ul className='pagination justify-content-center'>
-              <li className='page-item shadow' onClick={decrease}>
-                <a className='page-link' href='/#' aria-label='Previous'>
-                  <span aria-hidden='true'>&laquo;</span>
-                </a>
-              </li>
-              <li className='page-item shadow'>
-                <a className='page-link' href='/#'>
-                  Page {page} of {totalPages}
-                </a>
-              </li>
-              <li className='page-item shadow' onClick={increase}>
-                <a className='page-link' href='/#' aria-label='Next'>
-                  <span aria-hidden='true'>&raquo;</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
+        {totalPages > 0 && (
+          <div>
+            <nav aria-label='Page navigation example'>
+              <ul className='pagination justify-content-center'>
+                {page === 1 ? (
+                  <></>
+                ) : (
+                  <li className='page-item shadow' onClick={decrease}>
+                    <a className='page-link' href='/#' aria-label='Previous'>
+                      <span aria-hidden='true'>&laquo;</span>
+                    </a>
+                  </li>
+                )}
+
+                <li className='page-item shadow'>
+                  <a className='page-link' href='/#'>
+                    Page {page} of {totalPages}
+                  </a>
+                </li>
+                {page === totalPages ? (
+                  <></>
+                ) : (
+                  <li className='page-item shadow' onClick={increase}>
+                    <a className='page-link' href='/#' aria-label='Next'>
+                      <span aria-hidden='true'>&raquo;</span>
+                    </a>
+                  </li>
+                )}
+              </ul>
+            </nav>
+          </div>
+        )}
       </div>
       <div className='position-absolute' style={{ top: '52vh', right: '0' }}>
         <Tags tags={tags} handleSearchByTags={handleSearchByTags} />
